@@ -11,4 +11,68 @@ body {
 
 * {
   box-sizing: border-box;
-} 
+}
+
+/* Share buttons styles */
+.share-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+    justify-content: center; /* Centers the buttons if they don't fill the container */
+    align-items: center; /* Vertically align items in the flex container */
+}
+
+.share-buttons button,
+#new-quote /* Applying similar base style to new-quote button */
+{
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: #333; /* Darker text for better contrast on light bg */
+    background-color: #f0f0f0; /* Light grey background */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Remove underline if it's an <a> styled as button */
+    display: inline-flex; /* Helps with alignment of text/icons if any */
+    align-items: center;
+    justify-content: center;
+}
+
+#new-quote {
+    color: white;
+    background-color: #007bff; /* A more modern blue */
+    border-color: #007bff;
+}
+
+.share-buttons button:hover,
+#new-quote:hover {
+    background-color: #e0e0e0; /* Slightly darker on hover */
+    color: #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+#new-quote:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3;
+    color: white;
+}
+
+/* Specific social media button colors - optional, can be classes */
+#share-linkedin {
+    /* background-color: #0077b5; color: white; border-color: #0077b5; */
+}
+#share-facebook {
+    /* background-color: #1877f2; color: white; border-color: #1877f2; */
+}
+#share-x {
+    /* background-color: #1da1f2; color: white; border-color: #1da1f2; */
+    /* For X, black might be more current if you prefer: */
+    /* background-color: #000000; color: white; border-color: #000000; */
+}
+
+/* Hover for specific social buttons - if you uncomment above */
+/* #share-linkedin:hover { background-color: #005582; } */
+/* #share-facebook:hover { background-color: #165db0; } */
+/* #share-x:hover { background-color: #0c85d0; } */
+/* #share-x:hover { background-color: #333333; } */ 
