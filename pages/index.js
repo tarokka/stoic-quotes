@@ -144,7 +144,7 @@ export default function Home() {
 
         <footer className="w-full h-24 flex items-center justify-center border-t border-gray-700 mt-12">
           <p className="text-gray-400">
-            Powered by Stoic Wisdom. Images from Pixabay.
+            Another n3k0 craft works experiment. Images from Pixabay.
           </p>
         </footer>
       </div>
