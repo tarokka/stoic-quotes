@@ -101,6 +101,59 @@ export default function Home() {
     }
   };
 
+  const handleCopyQuote = () => {
+    if (quote.text && quote.author) {
+      const textToCopy = `"${quote.text}" - ${quote.author}`;
+      console.log("Copying to clipboard:", textToCopy);
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("Quote copied to clipboard!"); // Consider a more modern notification system later
+        })
+        .catch(err => {
+          console.error("Failed to copy quote: ", err);
+          alert("Failed to copy quote.");
+        });
+    } else {
+      alert("No quote to copy.");
+    }
+  };
+
+  const handleShareLinkedIn = () => {
+    if (quote.text && quote.author) {
+      const text = `"${quote.text}" - ${quote.author}`;
+      const pageUrl = window.location.href;
+      console.log("LinkedIn Share - Text:", text, "URL:", pageUrl);
+      const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=A%20Stoic%20Quote&summary=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      alert("No quote to share.");
+    }
+  };
+
+  const handleShareFacebook = () => {
+    if (quote.text && quote.author) {
+      const text = `"${quote.text}" - ${quote.author}`;
+      const pageUrl = window.location.href;
+      console.log("Facebook Share - Text:", text, "URL:", pageUrl);
+      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      alert("No quote to share.");
+    }
+  };
+
+  const handleShareX = () => {
+    if (quote.text && quote.author) {
+      const pageUrl = window.location.href;
+      const fullText = `"${quote.text}" - ${quote.author} ${pageUrl}`;
+      console.log("X Share - Full Text:", fullText);
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(fullText)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      alert("No quote to share.");
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-gray-900"> {/* Fallback background */}
       {/* Background Image Layer 1 */}
@@ -121,7 +174,13 @@ export default function Home() {
       <div className="relative z-3 flex flex-col items-center justify-center min-h-screen text-white p-4">
         <Head>
           <title>Stoic Quote Generator</title>
-          <meta name="description" content="Generate random Stoic quotes" />
+          <meta name="description" content="Generate random Stoic quotes and share them." />
+          <meta property="og:title" content="Stoic Quote Generator" />
+          <meta property="og:description" content="Discover timeless wisdom with randomly generated Stoic quotes and share them with your friends." />
+          <meta property="og:type" content="website" />
+          {/* Add og:url and og:image when you have a deployed URL and a specific image */}
+          {/* <meta property="og:url" content="YOUR_DEPLOYED_SITE_URL" /> */}
+          {/* <meta property="og:image" content="YOUR_PREVIEW_IMAGE_URL" /> */}
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
@@ -135,10 +194,38 @@ export default function Home() {
             </p>
             <button
               onClick={handleNewQuoteAndImage}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mb-8"
             >
               New Quote
             </button>
+
+            {/* Share Buttons Container */}
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <button
+                onClick={handleCopyQuote}
+                className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75"
+              >
+                Copy Quote
+              </button>
+              <button
+                onClick={handleShareLinkedIn}
+                className="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-75"
+              >
+                Share on LinkedIn
+              </button>
+              <button
+                onClick={handleShareFacebook}
+                className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-75"
+              >
+                Share on Facebook
+              </button>
+              <button
+                onClick={handleShareX}
+                className="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-75"
+              >
+                Share on X
+              </button>
+            </div>
           </div>
         </main>
 
